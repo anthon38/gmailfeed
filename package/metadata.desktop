@@ -11,7 +11,7 @@ X-Plasma-DefaultSize=200,200
 
 X-KDE-PluginInfo-Author=Anthony Vital
 X-KDE-PluginInfo-Email=anthony.vital@gmail.com
-# X-KDE-PluginInfo-Website=http://www.gmail.com
+X-KDE-PluginInfo-Website=https://github.com/anthon38/gmailfeed
 X-KDE-PluginInfo-Category=Online Services
 X-KDE-PluginInfo-Name=org.kde.plasma.gmailfeed
 X-KDE-PluginInfo-Version=1.0
