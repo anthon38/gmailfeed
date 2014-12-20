@@ -1,0 +1,66 @@
+# gmailfeed french translations.
+# Copyright (C) 2014 Anthony Vital
+# This file is distributed under the same license as the Gmail Feed package.
+# Anthony Vital <anthony.vital@gmail.com>, 2014
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gmailfeed 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-19 15:31+0100\n"
+"PO-Revision-Date: 2014-12-19 13:48+0100\n"
+"Last-Translator: Anthony Vital <anthony.vital@gmail.com>\n"
+"Language-Team: French <anthony.vital@gmail.com>\n"
+"Language: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: package/contents/ui/FullRepresentation.qml:44
+#: package/contents/ui/main.qml:132
+msgid "Open inbox"
+msgstr "Ouvrir la boîte de réception"
+
+#: package/contents/ui/main.qml:81
+msgid "1 unread message"
+msgid_plural "%1 unread messages"
+msgstr[0] "1 message non lu"
+msgstr[1] "%1 messages non lus"
+
+#: package/contents/ui/main.qml:83
+msgid "No unread messages"
+msgstr "Aucun message non lu"
+
+#: package/contents/ui/main.qml:90
+msgid "1 new message"
+msgid_plural "%1 new messages"
+msgstr[0] "1 nouveau message"
+msgstr[1] "%1 nouveaux messages"
+
+#: package/contents/ui/main.qml:97
+msgid "Checking for new messages..."
+msgstr "Recherche de nouveaux messages..."
+
+#: package/contents/ui/main.qml:133
+msgid "Check mail"
+msgstr "Relever le courrier"
+
+#: package/contents/ui/configGeneral.qml:35
+msgid "Polling interval: "
+msgstr "Intervalle de vérification"
+
+#: package/contents/ui/configGeneral.qml:41
+msgctxt "Polling interval in minutes"
+msgid "min"
+msgid_plural "min"
+msgstr[0] "min"
+msgstr[1] "min"
+
+#: package/contents/config/config.qml:24
+msgid "General"
+msgstr "Général"
+
+#: package/contents/ui/main.qml:70
+msgid "Offline"
+msgstr "Hors-ligne"

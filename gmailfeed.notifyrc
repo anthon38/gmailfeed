@@ -1,0 +1,23 @@
+[Global]
+IconName=gmailfeed
+Comment=Gmail notifications
+Comment[fr]=Notifications Gmail
+
+[Event/new-mail-arrived]
+Name=New Mail Arrived
+Name[fr]=Un nouveau message est arrivé
+Name[pl]=Nowe wiadomości
+Name[ru]=Пришла почта
+Name[el]=Νέο μήνυμα προσήλθε
+Name[sr]=Имате нову е-поруку
+Name[de]=Neue Nachricht erhalten
+Name[zh_TW]=新郵件抵達
+Name[bg]=Имате нова поща
+Name[es]=Tiene correo nuevo
+Name[it]=Arrivo di un Nuovo Messaggio
+Name[cs]=Přijmutí Nového Emailu
+Name[uk]=Отримано нова пошта
+Name[nl]=U heeft nieuwe mail
+Name[pt_BR]=Novos e-mails disponíveis
+Sound=KDE-Im-New-Mail.ogg
+Action=Popup|Sound

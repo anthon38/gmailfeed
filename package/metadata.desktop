@@ -1,0 +1,25 @@
+[Desktop Entry]
+Name=Gmail feed
+Name[fr]=Flux Gmail
+Comment=Gmail Atom feed
+Comment[fr]=Flux Atom Gmail
+Icon=gmailfeed
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-DefaultSize=200,200
+
+X-KDE-PluginInfo-Author=Anthony Vital
+X-KDE-PluginInfo-Email=anthony.vital@gmail.com
+# X-KDE-PluginInfo-Website=http://www.gmail.com
+X-KDE-PluginInfo-Category=Online Services
+X-KDE-PluginInfo-Name=org.kde.plasma.gmailfeed
+X-KDE-PluginInfo-Version=1.0
+
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-NotificationArea=true
+X-KDE-ServiceTypes=Plasma/Applet
+Type=Service
+
