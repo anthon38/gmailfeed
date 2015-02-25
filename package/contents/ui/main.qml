@@ -111,7 +111,6 @@ Item {
     Timer {
         id: polltimer
         
-        running: false
         repeat: true
         triggeredOnStart: true
         interval: plasmoid.configuration.pollinterval * 60000
@@ -128,10 +127,10 @@ Item {
     
     Component.onCompleted: { 
         plasmoid.status = PlasmaCore.Types.PassiveStatus
-        polltimer.start()
         plasmoid.setAction("openInbox", i18n("Open inbox"), "folder-mail")
         plasmoid.setAction("checkMail", i18n("Check mail"), "mail-receive")
         plasmoid.setActionSeparator("separator0")
+        polltimer.start()
     }
     
 }
