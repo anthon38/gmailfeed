@@ -39,7 +39,14 @@ Item {
     NetworkStatus {
         id: networkStatus
         
-//         onIsOnlineChanged: if (isOnline) xmlModel.reload() //reports online too early
+        onIsOnlineChanged: if (isOnline) checkMailOneShotTimer.start()
+    }
+    
+    Timer {
+        id: checkMailOneShotTimer
+        
+        interval: 500
+        onTriggered: action_checkMail()
     }
     
     Notification {
