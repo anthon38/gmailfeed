@@ -39,7 +39,7 @@ Item {
     NetworkStatus {
         id: networkStatus
         
-        onIsOnlineChanged: if (isOnline) checkMailOneShotTimer.start()
+        onIsOnlineChanged: checkMailOneShotTimer.start()
     }
     
     Timer {
@@ -74,10 +74,6 @@ Item {
         }
         
         onStatusChanged: {
-            if (!networkStatus.isOnline) {
-                mainItem.subtext = i18n("Offline")
-                return
-            }
             switch (status) {
                 case XmlListModel.Null:
                     mainItem.subtext = "Null model"
@@ -119,7 +115,7 @@ Item {
         repeat: true
         triggeredOnStart: true
         interval: plasmoid.configuration.pollinterval * 60000
-        onTriggered: xmlModel.reload()
+        onTriggered: networkStatus.isOnline ? xmlModel.reload() : mainItem.subtext = i18n("Offline")
     }
     
     function action_checkMail() {
