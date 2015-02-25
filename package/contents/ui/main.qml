@@ -110,12 +110,13 @@ Item {
         
         running: false
         repeat: true
+        triggeredOnStart: true
         interval: plasmoid.configuration.pollinterval * 60000
         onTriggered: xmlModel.reload()
     }
     
     function action_checkMail() {
-        xmlModel.reload()
+        polltimer.restart()
     }
     
     function action_openInbox() {
