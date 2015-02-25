@@ -124,7 +124,7 @@ Item {
     
     Component.onCompleted: { 
         plasmoid.status = PlasmaCore.Types.PassiveStatus
-        polltimer.running = true
+        polltimer.start()
         plasmoid.setAction("openInbox", i18n("Open inbox"), "folder-mail")
         plasmoid.setAction("checkMail", i18n("Check mail"), "mail-receive")
         plasmoid.setActionSeparator("separator0")
