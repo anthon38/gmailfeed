@@ -45,7 +45,7 @@ Item {
     Timer {
         id: checkMailOneShotTimer
         
-        interval: 500
+        interval: 1000
         onTriggered: action_checkMail()
     }
     
