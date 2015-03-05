@@ -23,6 +23,8 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
     
+    focus: true
+    
     PlasmaExtras.Heading {
         id: heading
         
@@ -67,12 +69,32 @@ Item {
                 anchors.right: parent.right
                 authorName: author
                 message: title
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: Qt.openUrlExternally(link)
-                }
                 onContainsMouseChanged: inboxView.currentIndex = containsMouse ? index : -1
             }
+        }
+    }
+    
+    Keys.onPressed: {
+        switch(event.key) {
+            case Qt.Key_Up: {
+                if (inboxView.currentIndex > 0) --inboxView.currentIndex;
+                event.accepted = true;
+                break;
+            }
+            case Qt.Key_Down: {
+                if (inboxView.currentIndex < inboxView.count-1) ++inboxView.currentIndex;
+                event.accepted = true;
+                break;
+            }
+            
+            case Qt.Key_Enter:
+            case Qt.Key_Return: {
+                if (inboxView.currentIndex != -1) inboxView.currentItem.activate();
+                event.accepted = true;
+                break;
+            }
+            default: 
+                break;
         }
     }
 } 

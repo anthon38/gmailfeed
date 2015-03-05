@@ -44,4 +44,13 @@ PlasmaComponents.ListItem {
         anchors.right: parent.right
         elide: Text.ElideRight
     }
+    
+    MouseArea {
+        anchors.fill: parent
+        onClicked: activate()
+    }
+    
+    function activate() {
+        Qt.openUrlExternally(link)
+    }
 }
