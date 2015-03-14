@@ -57,7 +57,8 @@ Item {
         
         ListView {
             id: inboxView;
-            anchors.fill: parent;
+            
+            anchors.rightMargin: units.gridUnit
             clip: true
             model: xmlModel;
             currentIndex: -1;
@@ -65,8 +66,6 @@ Item {
             focus: true
             highlight: PlasmaComponents.Highlight {}
             delegate: MessageDelegate {
-                anchors.left: parent.left
-                anchors.right: parent.right
                 authorName: author
                 message: title
                 onContainsMouseChanged: inboxView.currentIndex = containsMouse ? index : -1
