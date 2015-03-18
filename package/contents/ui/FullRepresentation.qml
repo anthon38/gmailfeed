@@ -66,8 +66,6 @@ Item {
             focus: true
             highlight: PlasmaComponents.Highlight {}
             delegate: MessageDelegate {
-                authorName: author
-                message: title
                 onContainsMouseChanged: inboxView.currentIndex = containsMouse ? index : -1
             }
         }

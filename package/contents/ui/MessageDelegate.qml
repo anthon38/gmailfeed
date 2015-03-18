@@ -22,26 +22,15 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 
 PlasmaComponents.ListItem {
     id: listItem
-    
-    property alias authorName: authorLabel.name
-    property alias message: titleLabel.text
 
     enabled: true
     
     PlasmaComponents.Label {
-        id: authorLabel
-        
-        property string name: ""
+        id: label
+
         anchors.left: parent.left
-        font.weight: Font.DemiBold;
-        text: name+": "
-    }
-    
-    PlasmaComponents.Label {
-        id: titleLabel
-        
-        anchors.left: authorLabel.right
         anchors.right: parent.right
+        text: i18nc("Message delegate, author: title", "<b>%1: </b>%2", author, title)
         elide: Text.ElideRight
     }
     
