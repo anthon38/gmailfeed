@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmailfeed 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-19 15:31+0100\n"
+"POT-Creation-Date: 2015-03-18 13:44+0100\n"
 "PO-Revision-Date: 2014-12-19 13:48+0100\n"
 "Last-Translator: Anthony Vital <anthony.vital@gmail.com>\n"
 "Language-Team: French <anthony.vital@gmail.com>\n"
@@ -17,32 +17,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: package/contents/ui/FullRepresentation.qml:44
-#: package/contents/ui/main.qml:132
+#: package/contents/ui/FullRepresentation.qml:46
+#: package/contents/ui/main.qml:130
 msgid "Open inbox"
 msgstr "Ouvrir la boîte de réception"
 
-#: package/contents/ui/main.qml:81
+#: package/contents/ui/main.qml:81 package/contents/ui/main.qml:84
 msgid "1 unread message"
 msgid_plural "%1 unread messages"
 msgstr[0] "1 message non lu"
 msgstr[1] "%1 messages non lus"
 
-#: package/contents/ui/main.qml:83
+#: package/contents/ui/main.qml:83 package/contents/ui/main.qml:86
 msgid "No unread messages"
 msgstr "Aucun message non lu"
 
-#: package/contents/ui/main.qml:90
+#: package/contents/ui/main.qml:90 package/contents/ui/main.qml:93
 msgid "1 new message"
 msgid_plural "%1 new messages"
 msgstr[0] "1 nouveau message"
 msgstr[1] "%1 nouveaux messages"
 
-#: package/contents/ui/main.qml:97
+#: package/contents/ui/main.qml:97 package/contents/ui/main.qml:99
 msgid "Checking for new messages..."
 msgstr "Recherche de nouveaux messages..."
 
-#: package/contents/ui/main.qml:133
+#: package/contents/ui/main.qml:133 package/contents/ui/main.qml:131
 msgid "Check mail"
 msgstr "Relever le courrier"
 
@@ -61,6 +61,11 @@ msgstr[1] "min"
 msgid "General"
 msgstr "Général"
 
-#: package/contents/ui/main.qml:70
+#: package/contents/ui/main.qml:70 package/contents/ui/main.qml:117
 msgid "Offline"
 msgstr "Hors-ligne"
+
+#: package/contents/ui/MessageDelegate.qml:33
+msgctxt "Message delegate, author: title"
+msgid "<b>%1: </b>%2"
+msgstr "<b>%1 : </b>%2"
