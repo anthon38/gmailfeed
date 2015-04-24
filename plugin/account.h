@@ -1,5 +1,5 @@
 /****************************************************************************
- *  Copyright (c) 2014 Anthony Vital <anthony.vital@gmail.com>              *
+ *  Copyright (c) 2015 Anthony Vital <anthony.vital@gmail.com>              *
  *                                                                          *
  *  This file is part of Gmail Feed.                                        *
  *                                                                          *
@@ -17,17 +17,37 @@
  *  along with Gmail Feed.  If not, see <http://www.gnu.org/licenses/>.     *
  ****************************************************************************/
 
-#include "gmailfeedplugin.h"
-#include "networkstatus.h"
-#include "notification.h"
-#include "account.h"
- 
-#include <QtQml>
- 
-void GmailFeedPlugin::registerTypes (const char *uri)
+#ifndef ACCOUNT_H
+#define ACCOUNT_H
+
+#include <QObject>
+#include <QNetworkAccessManager>
+
+class Account : public QObject
 {
-    Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.gmailfeed"));
-    qmlRegisterType<NetworkStatus>(uri, 0, 1, "NetworkStatus");
-    qmlRegisterType<Notification>(uri, 0, 1, "Notification");
-    qmlRegisterType<Account>(uri, 0, 1, "Account");
-}
+    Q_OBJECT
+
+public:
+    Q_PROPERTY(QString feed READ feed NOTIFY feedChanged)
+
+    Q_INVOKABLE void getFeed();
+    
+    explicit Account(QObject *parent = 0);
+    ~Account();
+
+    QString feed() const {return m_feed;}
+
+Q_SIGNALS:
+    void feedChanged();
+
+private Q_SLOTS:
+    void newData();
+
+private:
+    QByteArray requestToken();
+
+    QNetworkAccessManager m_manager;
+    QString m_feed;
+};
+
+#endif
