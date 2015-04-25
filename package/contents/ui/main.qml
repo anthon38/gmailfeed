@@ -118,7 +118,7 @@ Item {
         repeat: true
         triggeredOnStart: true
         interval: plasmoid.configuration.pollinterval * 60000
-        onTriggered: networkStatus.isOnline ? account.getFeed() : mainItem.subtext = i18n("Offline")
+        onTriggered: networkStatus.isOnline ? account.updateFeed() : mainItem.subtext = i18n("Offline")
     }
     
     function action_checkMail() {

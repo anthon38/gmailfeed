@@ -23,31 +23,40 @@
 #include <QObject>
 #include <QNetworkAccessManager>
 
+#include <Accounts/Account>
+
+class KJob;
+
 class Account : public QObject
 {
     Q_OBJECT
 
 public:
     Q_PROPERTY(QString feed READ feed NOTIFY feedChanged)
+    Q_PROPERTY(QString isConfigured READ isConfigured NOTIFY isConfiguredChanged)
 
-    Q_INVOKABLE void getFeed();
+    Q_INVOKABLE void updateFeed();
     
     explicit Account(QObject *parent = 0);
     ~Account();
 
     QString feed() const {return m_feed;}
+    bool isConfigured() const {return m_isConfigured;}
 
 Q_SIGNALS:
     void feedChanged();
+    void isConfiguredChanged();
 
 private Q_SLOTS:
+    void credentialsReceived(KJob *job);
     void newData();
+    void accountsChanged();
 
 private:
-    QByteArray requestToken();
-
-    QNetworkAccessManager m_manager;
+    Accounts::AccountId m_id;
+    QNetworkAccessManager m_networkManager;
     QString m_feed;
+    bool m_isConfigured;
 };
 
 #endif

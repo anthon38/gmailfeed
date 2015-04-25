@@ -29,43 +29,45 @@
 
 Account::Account(QObject *parent)
     : QObject(parent)
+    , m_id(0)
+    , m_isConfigured(false)
 {
+    accountsChanged();
+    connect(KAccounts::accountsManager(), &Accounts::Manager::accountCreated, this, &Account::accountsChanged);
+    connect(KAccounts::accountsManager(), &Accounts::Manager::accountRemoved, this, &Account::accountsChanged);
+    connect(KAccounts::accountsManager(), &Accounts::Manager::accountUpdated, this, &Account::accountsChanged);
 }
 
 Account::~Account()
 {
 }
 
-QByteArray Account::requestToken()
+void Account::updateFeed()
 {
-    //TODO Make it possible to configure the accountid
-    Accounts::Manager* mgr = KAccounts::accountsManager();
-    auto accounts =  mgr->accountList(QStringLiteral("gmail-feed"));
-
-    if (accounts.isEmpty()) {
+    if (!m_isConfigured) {
         qWarning()<<"No Gmail account configured";
-        return QByteArray();
-    }
-    Accounts::AccountId id = accounts.first();
-
-    auto job = new GetCredentialsJob(id, this);
-    bool b = job->exec();
-    if (!b) {
-        qWarning() << "Couldn't fetch credentials";
-        return QByteArray();
+        return;
     }
 
-    //TODO: make async
-    QByteArray accessToken = job->credentialsData()[QStringLiteral("AccessToken")].toByteArray();
-    return accessToken;
+    auto job = new GetCredentialsJob(m_id, this);
+    connect(job, &GetCredentialsJob::result, this, &Account::credentialsReceived);
+    job->start();
 }
 
-void Account::getFeed()
+void Account::credentialsReceived(KJob *job)
 {
-    QNetworkRequest req(QUrl("https://mail.google.com/mail/feed/atom"));
-    req.setRawHeader("Authorization", "Bearer "+requestToken());
+    GetCredentialsJob* credentials = qobject_cast<GetCredentialsJob*>(job);
+    if (credentials->error()) {
+        qWarning() << "Couldn't fetch credentials";
+        return;
+    }
 
-    auto reply = m_manager.get(req);
+    auto accessToken = credentials->credentialsData()[QStringLiteral("AccessToken")].toByteArray();
+
+    QNetworkRequest req(QUrl("https://mail.google.com/mail/feed/atom"));
+    req.setRawHeader("Authorization", "Bearer "+accessToken);
+
+    auto reply = m_networkManager.get(req);
     connect(reply, &QNetworkReply::readyRead, this, &Account::newData);
 }
 
@@ -79,4 +81,14 @@ void Account::newData()
 
     m_feed = QString(reply->readAll());
     Q_EMIT(feedChanged());
+}
+
+void Account::accountsChanged()
+{
+    //TODO Make it possible to configure the accountid
+    auto accounts =  KAccounts::accountsManager()->accountList(QStringLiteral("gmail-feed"));
+    m_isConfigured = !accounts.isEmpty();
+    Q_EMIT(isConfiguredChanged());
+
+    m_id = m_isConfigured ? accounts.first() : 0;
 }
