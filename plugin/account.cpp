@@ -32,10 +32,6 @@ Account::Account(QObject *parent)
     , m_id(0)
     , m_isConfigured(false)
 {
-    accountsChanged();
-    connect(KAccounts::accountsManager(), &Accounts::Manager::accountCreated, this, &Account::accountsChanged);
-    connect(KAccounts::accountsManager(), &Accounts::Manager::accountRemoved, this, &Account::accountsChanged);
-    connect(KAccounts::accountsManager(), &Accounts::Manager::accountUpdated, this, &Account::accountsChanged);
 }
 
 Account::~Account()
@@ -68,7 +64,7 @@ void Account::credentialsReceived(KJob *job)
     req.setRawHeader("Authorization", "Bearer "+accessToken);
 
     auto reply = m_networkManager.get(req);
-    connect(reply, &QNetworkReply::readyRead, this, &Account::newData);
+    connect(reply, &QNetworkReply::finished, this, &Account::newData);
 }
 
 void Account::newData()
@@ -83,12 +79,27 @@ void Account::newData()
     Q_EMIT(feedChanged());
 }
 
-void Account::accountsChanged()
+void Account::setId(int id)
 {
-    //TODO Make it possible to configure the accountid
-    auto accounts =  KAccounts::accountsManager()->accountList(QStringLiteral("gmail-feed"));
-    m_isConfigured = !accounts.isEmpty();
-    Q_EMIT(isConfiguredChanged());
+    if (id == 0) {
+        m_id = 0;
+        m_name.clear();
+        m_isConfigured = false;
+        Q_EMIT(isConfiguredChanged());
+        Q_EMIT(idChanged());
+        qWarning() << "account id set to 0.";
+        return;
+    }
 
-    m_id = m_isConfigured ? accounts.first() : 0;
+    auto account = KAccounts::accountsManager()->account(qint32(id));
+    if (!account) {
+        qWarning() << "account id " << qint32(id) << "doesn't exist";
+        return;
+    }
+
+    m_id = qint32(id);
+    m_name = account->displayName();
+    m_isConfigured = true;
+    Q_EMIT(isConfiguredChanged());
+    Q_EMIT(idChanged());
 }

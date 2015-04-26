@@ -40,6 +40,7 @@ set(gmailfeedplugin_SRCS
     networkstatus.cpp
     notification.cpp
     account.cpp
+    accountsModel.cpp
 )
 
 install(FILES qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/gmailfeed)

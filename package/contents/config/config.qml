@@ -21,6 +21,11 @@ import org.kde.plasma.configuration 2.0
 
 ConfigModel {
     ConfigCategory {
+        name: i18n("Accounts")
+        icon: "user-identity"
+        source: "configAccounts.qml"
+    }
+    ConfigCategory {
         name: i18n("General")
         icon: "configure"
         source: "configGeneral.qml"

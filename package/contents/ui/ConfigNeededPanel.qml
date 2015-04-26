@@ -1,5 +1,5 @@
 /****************************************************************************
- *  Copyright (c) 2014 Anthony Vital <anthony.vital@gmail.com>              *
+ *  Copyright (c) 2015 Anthony Vital <anthony.vital@gmail.com>              *
  *                                                                          *
  *  This file is part of Gmail Feed.                                        *
  *                                                                          *
@@ -18,10 +18,26 @@
  ****************************************************************************/
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.0 as QtLayouts
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
-    Loader {
-        anchors.fill: parent
-        source: mainItem.configurationRequired ? "ConfigNeededPanel.qml" : "FeedPanel.qml"
+    
+    QtLayouts.ColumnLayout {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
+        
+        PlasmaComponents.Label {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: i18n("Please configure an account")
+        }
+
+//         PlasmaComponents.Button {
+//             anchors.horizontalCenter: parent.horizontalCenter
+//             iconSource: "configure"
+//             text: i18n("Configure...")
+// //             onClicked: 
+//         }
     }
 } 
+ 

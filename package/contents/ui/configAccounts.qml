@@ -17,52 +17,55 @@
  *  along with Gmail Feed.  If not, see <http://www.gnu.org/licenses/>.     *
  ****************************************************************************/
 
-#ifndef ACCOUNT_H
-#define ACCOUNT_H
+import QtQuick 2.0
+import QtQuick.Layouts 1.0 as QtLayouts
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddons
+import org.kde.plasma.private.gmailfeed 0.1
 
-#include <QObject>
-#include <QNetworkAccessManager>
+Item {
+    id: accountsPage
 
-#include <Accounts/Account>
+    property int cfg_accountId
 
-class KJob;
-
-class Account : public QObject
-{
-    Q_OBJECT
-
-public:
-    Q_PROPERTY(QString feed READ feed NOTIFY feedChanged)
-    Q_PROPERTY(QString isConfigured READ isConfigured NOTIFY isConfiguredChanged)
-    Q_PROPERTY(QString name READ name)
-    Q_PROPERTY(int accountId READ id WRITE setId NOTIFY idChanged)
-
-    Q_INVOKABLE void updateFeed();
+    onCfg_accountIdChanged: comboBox.currentIndex = accountsModel.indexOf(cfg_accountId)
     
-    explicit Account(QObject *parent = 0);
-    ~Account();
+    AccountsModel {
+        id: accountsModel
+        
+        onRowsInserted: {
+            comboBox.currentIndex = first
+            cfg_accountId = accountsModel.getId(first)
+        }
+        onRowsRemoved: {
+            comboBox.currentIndex = -1
+            cfg_accountId = 0
+        }
+    }
 
-    QString feed() const {return m_feed;}
-    bool isConfigured() const {return m_isConfigured;}
-    QString name() const {return m_name;}
-    int id() const {return int(m_id);}
-    void setId(int id);
+    QtLayouts.RowLayout {
+        id: currentAccountGroup
 
-Q_SIGNALS:
-    void feedChanged();
-    void isConfiguredChanged();
-    void idChanged();
+        PlasmaComponents.Label {
+            text: i18n("Current account: ")
+        }
 
-private Q_SLOTS:
-    void credentialsReceived(KJob *job);
-    void newData();
+        PlasmaComponents.ComboBox {
+            id: comboBox
 
-private:
-    Accounts::AccountId m_id;
-    QNetworkAccessManager m_networkManager;
-    QString m_feed;
-    bool m_isConfigured;
-    QString m_name;
-};
+            model: accountsModel
+            textRole: "name"
+            onActivated: cfg_accountId = accountsModel.getId(index)
+        }
+    }
 
-#endif
+    PlasmaComponents.Button {
+        anchors.right: parent.right
+        anchors.top: currentAccountGroup.top
+        anchors.bottom: currentAccountGroup.bottom
+
+        iconSource: "applications-internet"
+        text: i18n("Manage accounts...")
+        onClicked: KQuickControlsAddons.KCMShell.open("kcm_kaccounts")
+    }
+} 

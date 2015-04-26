@@ -37,4 +37,14 @@ PlasmaCore.IconItem {
             }
         }
     }
+
+    PlasmaCore.IconItem {
+        
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.top: parent.verticalCenter
+        anchors.left: parent.horizontalCenter
+        source: "emblem-important"
+        visible: mainItem.configurationRequired
+    }
 }

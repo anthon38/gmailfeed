@@ -21,13 +21,15 @@
 #include "networkstatus.h"
 #include "notification.h"
 #include "account.h"
- 
+#include "accountsModel.h"
+
 #include <QtQml>
- 
+
 void GmailFeedPlugin::registerTypes (const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.gmailfeed"));
     qmlRegisterType<NetworkStatus>(uri, 0, 1, "NetworkStatus");
     qmlRegisterType<Notification>(uri, 0, 1, "Notification");
     qmlRegisterType<Account>(uri, 0, 1, "Account");
+    qmlRegisterType<AccountsModel>(uri, 0, 1, "AccountsModel");
 }
