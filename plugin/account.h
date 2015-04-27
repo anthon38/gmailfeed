@@ -33,7 +33,7 @@ class Account : public QObject
 
 public:
     Q_PROPERTY(QString feed READ feed NOTIFY feedChanged)
-    Q_PROPERTY(QString isConfigured READ isConfigured NOTIFY isConfiguredChanged)
+    Q_PROPERTY(bool isConfigured READ isConfigured NOTIFY isConfiguredChanged)
     Q_PROPERTY(QString name READ name)
     Q_PROPERTY(int accountId READ id WRITE setId NOTIFY idChanged)
 

@@ -28,7 +28,6 @@ Item {
     
     property string subtext: ""
     property string title: Plasmoid.title
-    property bool configurationRequired: false
     
     Plasmoid.toolTipSubText: subtext
     Plasmoid.icon: xmlModel.count > 0 ? "mail-unread-new" : "mail-unread"
@@ -43,10 +42,8 @@ Item {
         accountId: plasmoid.configuration.accountId
         onAccountIdChanged: {
             if (accountId == 0) {
-                configurationRequired = true;
                 plasmoid.status = PlasmaCore.Types.ActiveStatus
             } else {
-                configurationRequired = false
                 plasmoid.status = PlasmaCore.Types.PassiveStatus
                 action_checkMail()
             }

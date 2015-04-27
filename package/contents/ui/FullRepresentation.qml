@@ -22,6 +22,6 @@ import QtQuick 2.0
 Item {
     Loader {
         anchors.fill: parent
-        source: mainItem.configurationRequired ? "ConfigNeededPanel.qml" : "FeedPanel.qml"
+        source: account.isConfigured ? "FeedPanel.qml" : "ConfigNeededPanel.qml"
     }
 } 
