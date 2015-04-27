@@ -45,6 +45,6 @@ PlasmaCore.IconItem {
         anchors.top: parent.verticalCenter
         anchors.left: parent.horizontalCenter
         source: "emblem-important"
-        visible: mainItem.configurationRequired
+        visible: !account.isConfigured
     }
 }
