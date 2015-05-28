@@ -1,0 +1,72 @@
+# gmailfeed polish translations.
+# Copyright (C) 2015 Daniel Winiarski
+# This file is distributed under the same license as the Gmail Feed package.
+#
+# Daniel Winiarski <daniel.winiarski.dw@gmail.com>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: gmailfeed 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-18 13:44+0100\n"
+"PO-Revision-Date: 2015-05-26 21:28+0100\n"
+"Last-Translator: Daniel Winiarski <daniel.winiarski.dw@gmail.com>\n"
+"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language: Polish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: package/contents/ui/FullRepresentation.qml:46
+#: package/contents/ui/main.qml:130
+msgid "Open inbox"
+msgstr "Otwórz skrzynkę odbiorczą"
+
+#: package/contents/ui/main.qml:81 package/contents/ui/main.qml:84
+msgid "1 unread message"
+msgid_plural "%1 unread messages"
+msgstr[0] "1 nieprzeczytana wiadomość"
+msgstr[1] "%1 nieprzeczytane wiadomości"
+
+#: package/contents/ui/main.qml:83 package/contents/ui/main.qml:86
+msgid "No unread messages"
+msgstr "Brak nieprzeczytanych wiadomości"
+
+#: package/contents/ui/main.qml:90 package/contents/ui/main.qml:93
+msgid "1 new message"
+msgid_plural "%1 new messages"
+msgstr[0] "1 nowa wiadomość"
+msgstr[1] "%1 nowe wiadomości"
+
+#: package/contents/ui/main.qml:97 package/contents/ui/main.qml:99
+msgid "Checking for new messages..."
+msgstr "Sprawdzanie nowych wiadomości..."
+
+#: package/contents/ui/main.qml:133 package/contents/ui/main.qml:131
+msgid "Check mail"
+msgstr "Sprawdź pocztę"
+
+#: package/contents/ui/configGeneral.qml:35
+msgid "Polling interval: "
+msgstr "Częstotliwość sprawdzania:"
+
+#: package/contents/ui/configGeneral.qml:41
+msgctxt "Polling interval in minutes"
+msgid "min"
+msgid_plural "min"
+msgstr[0] "min"
+msgstr[1] "min"
+
+#: package/contents/config/config.qml:24
+msgid "General"
+msgstr "Ogólne"
+
+#: package/contents/ui/main.qml:70 package/contents/ui/main.qml:117
+msgid "Offline"
+msgstr "Tryb offline"
+
+#: package/contents/ui/MessageDelegate.qml:33
+msgctxt "Message delegate, author: title"
+msgid "<b>%1: </b>%2"
+msgstr "<b>%1 : </b>%2"
