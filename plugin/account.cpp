@@ -63,6 +63,11 @@ void Account::credentialsReceived(KJob *job)
     QNetworkRequest req(QUrl("https://mail.google.com/mail/feed/atom"));
     req.setRawHeader("Authorization", "Bearer "+accessToken);
 
+#if QT_VERSION == 0x050501
+    // Workaround QTBUG-49760
+    // If the network is not accessible this shouldn't be called anyway
+    m_networkManager.setNetworkAccessible(QNetworkAccessManager::Accessible);
+#endif
     auto reply = m_networkManager.get(req);
     connect(reply, &QNetworkReply::finished, this, &Account::newData);
 }
