@@ -1,0 +1,71 @@
+# gmailfeed french translations.
+# Copyright (C) 2014 Anthony Vital
+# This file is distributed under the same license as the Gmail Feed package.
+# Anthony Vital <anthony.vital@gmail.com>, 2014
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gmailfeed 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-23 11:37+0100\n"
+"PO-Revision-Date: 2014-12-19 13:48+0100\n"
+"Last-Translator: Martino Pilia <martino.pilia@gmail.com>\n"
+"Language-Team: Italian <martino.pilia@gmail.com>\n"
+"Language: Italian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: package/contents/ui/FullRepresentation.qml:46
+#: package/contents/ui/main.qml:130
+msgid "Open inbox"
+msgstr "Apri la casella di posta"
+
+#: package/contents/ui/main.qml:81 package/contents/ui/main.qml:84
+msgid "1 unread message"
+msgid_plural "%1 unread messages"
+msgstr[0] "1 messaggio non letto"
+msgstr[1] "%1 messaggi non letti"
+
+#: package/contents/ui/main.qml:83 package/contents/ui/main.qml:86
+msgid "No unread messages"
+msgstr "Nessun messaggio non letto"
+
+#: package/contents/ui/main.qml:90 package/contents/ui/main.qml:93
+msgid "1 new message"
+msgid_plural "%1 new messages"
+msgstr[0] "1 nuovo messaggio"
+msgstr[1] "%1 nuovi messaggi"
+
+#: package/contents/ui/main.qml:97 package/contents/ui/main.qml:99
+msgid "Checking for new messages..."
+msgstr "Controllo in corso per nuovi messaggi..."
+
+#: package/contents/ui/main.qml:133 package/contents/ui/main.qml:131
+msgid "Check mail"
+msgstr "Controlla la posta"
+
+#: package/contents/ui/configGeneral.qml:35
+msgid "Polling interval: "
+msgstr "Controlla ogni: "
+
+#: package/contents/ui/configGeneral.qml:41
+msgctxt "Polling interval in minutes"
+msgid "min"
+msgid_plural "min"
+msgstr[0] "min"
+msgstr[1] "min"
+
+#: package/contents/config/config.qml:24
+msgid "General"
+msgstr "Impostazioni generali"
+
+#: package/contents/ui/main.qml:70 package/contents/ui/main.qml:117
+msgid "Offline"
+msgstr "Non in linea"
+
+#: package/contents/ui/MessageDelegate.qml:33
+msgctxt "Message delegate, author: title"
+msgid "<b>%1: </b>%2"
+msgstr "<b>%1 : </b>%2"
