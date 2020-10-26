@@ -1,5 +1,5 @@
 /****************************************************************************
- *  Copyright (c) 2014 Anthony Vital <anthony.vital@gmail.com>              *
+ *  Copyright (c) 2015 Anthony Vital <anthony.vital@gmail.com>              *
  *                                                                          *
  *  This file is part of Gmail Feed.                                        *
  *                                                                          *
@@ -17,17 +17,52 @@
  *  along with Gmail Feed.  If not, see <http://www.gnu.org/licenses/>.     *
  ****************************************************************************/
 
-import org.kde.plasma.configuration 2.0
+#ifndef ACCOUNT_H
+#define ACCOUNT_H
 
-ConfigModel {
-    ConfigCategory {
-        name: i18n("Accounts")
-        icon: "user-identity"
-        source: "configAccounts.qml"
-    }
-    ConfigCategory {
-        name: i18n("General")
-        icon: "configure"
-        source: "configGeneral.qml"
-    }
-}
+#include <QObject>
+#include <QNetworkAccessManager>
+
+#include <Accounts/Account>
+
+class KJob;
+
+class Account : public QObject
+{
+    Q_OBJECT
+
+public:
+    Q_PROPERTY(QString feed READ feed NOTIFY feedChanged)
+    Q_PROPERTY(bool isConfigured READ isConfigured NOTIFY isConfiguredChanged)
+    Q_PROPERTY(QString name READ name)
+    Q_PROPERTY(int accountId READ id WRITE setId NOTIFY idChanged)
+
+    Q_INVOKABLE void updateFeed();
+    
+    explicit Account(QObject *parent = 0);
+    ~Account();
+
+    QString feed() const {return m_feed;}
+    bool isConfigured() const {return m_isConfigured;}
+    QString name() const {return m_name;}
+    int id() const {return int(m_id);}
+    void setId(int id);
+
+Q_SIGNALS:
+    void feedChanged();
+    void isConfiguredChanged();
+    void idChanged();
+
+private Q_SLOTS:
+    void credentialsReceived(KJob *job);
+    void newData();
+
+private:
+    Accounts::AccountId m_id;
+    QNetworkAccessManager m_networkManager;
+    QString m_feed;
+    bool m_isConfigured;
+    QString m_name;
+};
+
+#endif

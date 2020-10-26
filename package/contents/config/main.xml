@@ -4,6 +4,12 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
                           http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name=""/>
+  <group name="Accounts">
+    <entry name="accountId" type="Int">
+      <whatsthis>The id of the current account.</whatsthis>
+      <default>0</default>
+    </entry>
+  </group>
   <group name="General">
     <entry name="pollinterval" type="Int">
       <whatsthis>Polling interval (in minutes).</whatsthis>

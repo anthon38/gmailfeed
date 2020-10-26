@@ -1,5 +1,5 @@
 /****************************************************************************
- *  Copyright (c) 2014 Anthony Vital <anthony.vital@gmail.com>              *
+ *  Copyright (c) 2015 Anthony Vital <anthony.vital@gmail.com>              *
  *                                                                          *
  *  This file is part of Gmail Feed.                                        *
  *                                                                          *
@@ -17,17 +17,27 @@
  *  along with Gmail Feed.  If not, see <http://www.gnu.org/licenses/>.     *
  ****************************************************************************/
 
-import org.kde.plasma.configuration 2.0
+import QtQuick 2.0
+import QtQuick.Layouts 1.0 as QtLayouts
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
-ConfigModel {
-    ConfigCategory {
-        name: i18n("Accounts")
-        icon: "user-identity"
-        source: "configAccounts.qml"
+Item {
+    
+    QtLayouts.ColumnLayout {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
+        
+        PlasmaComponents.Label {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: i18n("Please configure an account")
+        }
+
+//         PlasmaComponents.Button {
+//             anchors.horizontalCenter: parent.horizontalCenter
+//             iconSource: "configure"
+//             text: i18n("Configure...")
+// //             onClicked: 
+//         }
     }
-    ConfigCategory {
-        name: i18n("General")
-        icon: "configure"
-        source: "configGeneral.qml"
-    }
-}
+} 
+ 

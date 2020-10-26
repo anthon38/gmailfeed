@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service id="gmail-feed">
+  <type>gmail-feed</type>
+  <name>Gmail Feed</name>
+  <icon>gmailfeed</icon>
+  <provider>google-gmail</provider>
+  <translations>kaccounts-providers</translations>
+</service>

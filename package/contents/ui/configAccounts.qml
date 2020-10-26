@@ -1,5 +1,5 @@
 /****************************************************************************
- *  Copyright (c) 2014 Anthony Vital <anthony.vital@gmail.com>              *
+ *  Copyright (c) 2015 Anthony Vital <anthony.vital@gmail.com>              *
  *                                                                          *
  *  This file is part of Gmail Feed.                                        *
  *                                                                          *
@@ -18,33 +18,54 @@
  ****************************************************************************/
 
 import QtQuick 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.plasmoid 2.0
+import QtQuick.Layouts 1.0 as QtLayouts
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddons
+import org.kde.plasma.private.gmailfeed 0.1
 
-PlasmaCore.IconItem {
+Item {
+    id: accountsPage
+
+    property int cfg_accountId
+
+    onCfg_accountIdChanged: comboBox.currentIndex = accountsModel.indexOf(cfg_accountId)
     
-    anchors.fill: parent
-    source: Plasmoid.icon
-    
-    MouseArea {
-        anchors.fill: parent
-        acceptedButtons: Qt.LeftButton | Qt.MiddleButton
-        onClicked: {
-            if (mouse.button == Qt.MiddleButton) {
-                mainItem.action_openInbox()
-            } else {
-                plasmoid.expanded = !plasmoid.expanded
-            }
+    AccountsModel {
+        id: accountsModel
+        
+        onRowsInserted: {
+            comboBox.currentIndex = first
+            cfg_accountId = accountsModel.getId(first)
+        }
+        onRowsRemoved: {
+            comboBox.currentIndex = -1
+            cfg_accountId = 0
         }
     }
 
-    PlasmaCore.IconItem {
-        
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.top: parent.verticalCenter
-        anchors.left: parent.horizontalCenter
-        source: "emblem-important"
-        visible: !account.isConfigured
+    QtLayouts.RowLayout {
+        id: currentAccountGroup
+
+        PlasmaComponents.Label {
+            text: i18n("Current account: ")
+        }
+
+        PlasmaComponents.ComboBox {
+            id: comboBox
+
+            model: accountsModel
+            textRole: "name"
+            onActivated: cfg_accountId = accountsModel.getId(index)
+        }
     }
-}
+
+    PlasmaComponents.Button {
+        anchors.right: parent.right
+        anchors.top: currentAccountGroup.top
+        anchors.bottom: currentAccountGroup.bottom
+
+        iconSource: "applications-internet"
+        text: i18n("Manage accounts...")
+        onClicked: KQuickControlsAddons.KCMShell.open("kcm_kaccounts")
+    }
+} 

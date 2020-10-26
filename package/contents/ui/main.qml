@@ -36,6 +36,20 @@ Item {
     Plasmoid.switchWidth: units.gridUnit * 8
     Plasmoid.switchHeight: units.gridUnit * 8
     
+    Account {
+        id: account
+        
+        accountId: plasmoid.configuration.accountId
+        onAccountIdChanged: {
+            if (accountId == 0) {
+                plasmoid.status = PlasmaCore.Types.ActiveStatus
+            } else {
+                plasmoid.status = PlasmaCore.Types.PassiveStatus
+                action_checkMail()
+            }
+        }
+    }
+
     NetworkStatus {
         id: networkStatus
         
@@ -59,7 +73,7 @@ Item {
         property int newMailCount: 0
         property int newMailId: -1
 
-        source: "https://gmail.google.com/gmail/feed/atom"
+        xml: account.feed
         namespaceDeclarations: "declare default element namespace 'http://purl.org/atom/ns#';"
         query: "/feed/entry"
 
@@ -114,7 +128,7 @@ Item {
         repeat: true
         triggeredOnStart: true
         interval: plasmoid.configuration.pollinterval * 60000
-        onTriggered: networkStatus.isOnline ? xmlModel.reload() : mainItem.subtext = i18n("Offline")
+        onTriggered: networkStatus.isOnline ? account.updateFeed() : mainItem.subtext = i18n("Offline")
     }
     
     function action_checkMail() {
@@ -126,11 +140,10 @@ Item {
     }
     
     Component.onCompleted: { 
-        plasmoid.status = PlasmaCore.Types.PassiveStatus
+        plasmoid.status = PlasmaCore.Types.ActiveStatus
         plasmoid.setAction("openInbox", i18n("Open inbox"), "folder-mail")
         plasmoid.setAction("checkMail", i18n("Check mail"), "mail-receive")
         plasmoid.setActionSeparator("separator0")
-        polltimer.start()
     }
     
 }

@@ -1,5 +1,5 @@
 /****************************************************************************
- *  Copyright (c) 2014 Anthony Vital <anthony.vital@gmail.com>              *
+ *  Copyright (c) 2015 Anthony Vital <anthony.vital@gmail.com>              *
  *                                                                          *
  *  This file is part of Gmail Feed.                                        *
  *                                                                          *
@@ -17,17 +17,39 @@
  *  along with Gmail Feed.  If not, see <http://www.gnu.org/licenses/>.     *
  ****************************************************************************/
 
-import org.kde.plasma.configuration 2.0
+#ifndef ACCOUNTSMODEL_H
+#define ACCOUNTSMODEL_H
 
-ConfigModel {
-    ConfigCategory {
-        name: i18n("Accounts")
-        icon: "user-identity"
-        source: "configAccounts.qml"
-    }
-    ConfigCategory {
-        name: i18n("General")
-        icon: "configure"
-        source: "configGeneral.qml"
-    }
-}
+#include <QAbstractListModel>
+
+#include <Accounts/Account>
+
+class AccountsModel : public QAbstractListModel
+{
+    Q_OBJECT
+
+public:
+    enum  AccountRoles {
+            NameRole = Qt::UserRole,
+            IdRole = Qt::UserRole + 1
+        };
+    
+    explicit AccountsModel(QObject *parent = 0);
+    ~AccountsModel();
+
+    QHash<int, QByteArray> roleNames() const;
+    int rowCount(const QModelIndex & parent = QModelIndex()) const;
+    QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
+
+    Q_INVOKABLE int getId(int index) const;
+    Q_INVOKABLE int indexOf(int id) const;
+
+private Q_SLOTS:
+    void accountCreated(Accounts::AccountId id);
+    void accountRemoved(Accounts::AccountId id);
+
+private:
+    QList<Accounts::AccountId> m_accounts;
+};
+
+#endif
