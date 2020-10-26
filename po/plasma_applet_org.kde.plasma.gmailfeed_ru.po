@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmailfeed 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-13 13:44+0100\n"
+"POT-Creation-Date: 2020-10-26 18:50+0100\n"
 "PO-Revision-Date: 2017-07-13 13:48+0100\n"
 "Last-Translator: Jacobtey <jacobtey@gmail.com>\n"
 "Language-Team: Russian <jacobtey@gmail.com>\n"
@@ -17,32 +17,40 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: package/contents/ui/FullRepresentation.qml:44
+#: package/contents/ui/main.qml:132
 #: package/contents/ui/FullRepresentation.qml:46
-#: package/contents/ui/main.qml:130
+#: package/contents/ui/main.qml:130 package/contents/ui/FeedPanel.qml:46
+#: package/contents/ui/main.qml:144
 msgid "Open inbox"
 msgstr "Открыть Входящие"
 
 #: package/contents/ui/main.qml:81 package/contents/ui/main.qml:84
+#: package/contents/ui/main.qml:98
 msgid "1 unread message"
 msgid_plural "%1 unread messages"
 msgstr[0] "1 непрочитанное сообщение"
 msgstr[1] "%1 непрочитанных сообщений"
 
 #: package/contents/ui/main.qml:83 package/contents/ui/main.qml:86
+#: package/contents/ui/main.qml:100
 msgid "No unread messages"
 msgstr "Нет непрочитанных сообщений"
 
 #: package/contents/ui/main.qml:90 package/contents/ui/main.qml:93
+#: package/contents/ui/main.qml:107
 msgid "1 new message"
 msgid_plural "%1 new messages"
 msgstr[0] "1 новое сообщение"
 msgstr[1] "%1 новых сообщений"
 
 #: package/contents/ui/main.qml:97 package/contents/ui/main.qml:99
+#: package/contents/ui/main.qml:113
 msgid "Checking for new messages..."
 msgstr "Проверка новых сообщений..."
 
 #: package/contents/ui/main.qml:133 package/contents/ui/main.qml:131
+#: package/contents/ui/main.qml:145
 msgid "Check mail"
 msgstr "Проверить почту"
 
@@ -57,11 +65,12 @@ msgid_plural "min"
 msgstr[0] "мин"
 msgstr[1] "мин"
 
-#: package/contents/config/config.qml:24
+#: package/contents/config/config.qml:24 package/contents/config/config.qml:29
 msgid "General"
 msgstr "Общие"
 
 #: package/contents/ui/main.qml:70 package/contents/ui/main.qml:117
+#: package/contents/ui/main.qml:131
 msgid "Offline"
 msgstr "Нет связи"
 
@@ -69,3 +78,19 @@ msgstr "Нет связи"
 msgctxt "Message delegate, author: title"
 msgid "<b>%1: </b>%2"
 msgstr "<b>%1 : </b>%2"
+
+#: package/contents/ui/ConfigNeededPanel.qml:32
+msgid "Please configure an account"
+msgstr ""
+
+#: package/contents/ui/configAccounts.qml:50
+msgid "Current account: "
+msgstr ""
+
+#: package/contents/ui/configAccounts.qml:68
+msgid "Manage accounts..."
+msgstr ""
+
+#: package/contents/config/config.qml:24
+msgid "Accounts"
+msgstr ""
