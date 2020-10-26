@@ -19,7 +19,7 @@ ELSE(NOT GETTEXT_MSGFMT_EXECUTABLE)
                 STRING(REGEX REPLACE "\\.po$" "" _langCode ${_langCode} )
  
                 IF( _langCode )
-                        GET_FILENAME_COMPONENT(_lang ${_poFile} NAME_WE)
+                        STRING(REGEX REPLACE "\\.po$" "" _lang ${_poFileName} )
                         SET(_gmoFile ${CMAKE_CURRENT_BINARY_DIR}/${_lang}.gmo)
  
                         ADD_CUSTOM_COMMAND(TARGET translations
