@@ -1,0 +1,27 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "anthony.vital@gmail.com",
+                "Name": "Anthony Vital"
+            }
+        ],
+        "Name": "Gmail feed",
+        "Name[fr]": "Flux Gmail",
+        "Description": "Gmail Atom feed",
+        "Description[fr]": "Flux Atom Gmail",
+        "Category": "Online Services",
+        "Icon": "gmailfeed",
+        "Id": "org.kde.plasma.gmailfeed",
+        "License": "GPL3",
+        "Version": "2.0",
+        "Website": "https://github.com/anthon38/gmailfeed",
+        "EnabledByDefault": true
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-MainScript": "ui/main.qml",
+    "X-Plasma-NotificationArea": true,
+    "X-Plasma-NotificationAreaCategory": "SystemServices"
+}

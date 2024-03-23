@@ -17,11 +17,14 @@
  *  along with Gmail Feed.  If not, see <http://www.gnu.org/licenses/>.     *
  ****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick
 
 Item {
     Loader {
+        id: loader
+
         anchors.fill: parent
         source: account.isConfigured ? "FeedPanel.qml" : "ConfigNeededPanel.qml"
     }
+    Keys.forwardTo: [loader.item]
 } 

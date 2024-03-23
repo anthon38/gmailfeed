@@ -19,7 +19,7 @@
 
 #include "accountsModel.h"
 
-#include <KAccounts/core.h>
+#include <KAccounts/Core>
 
 #include <Accounts/Manager>
 

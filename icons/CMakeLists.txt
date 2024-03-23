@@ -1,6 +1,7 @@
 include(ECMInstallIcons)
     
-ecm_install_icons(ICONS
-    hisc-apps-gmailfeed.svgz
+ecm_install_icons(
+    ICONS sc-apps-gmailfeed.svgz
+    DESTINATION ${KDE_INSTALL_ICONDIR}
     THEME hicolor
-    DESTINATION ${ICON_INSTALL_DIR} )
+)

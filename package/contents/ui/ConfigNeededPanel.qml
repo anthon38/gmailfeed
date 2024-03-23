@@ -17,27 +17,17 @@
  *  along with Gmail Feed.  If not, see <http://www.gnu.org/licenses/>.     *
  ****************************************************************************/
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.0 as QtLayouts
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import QtQuick
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.plasma.plasmoid
 
 Item {
-    
-    QtLayouts.ColumnLayout {
+    PlasmaComponents.Button {
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
-        
-        PlasmaComponents.Label {
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: i18n("Please configure an account")
-        }
-
-//         PlasmaComponents.Button {
-//             anchors.horizontalCenter: parent.horizontalCenter
-//             iconSource: "configure"
-//             text: i18n("Configure...")
-// //             onClicked: 
-//         }
+        icon.name: "configure"
+        text: i18n("Configure...")
+        onClicked: Plasmoid.internalAction("configure").trigger()
     }
 } 
  

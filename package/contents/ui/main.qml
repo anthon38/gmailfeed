@@ -17,24 +17,25 @@
  *  along with Gmail Feed.  If not, see <http://www.gnu.org/licenses/>.     *
  ****************************************************************************/
 
-import QtQuick 2.0
-import QtQuick.XmlListModel 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.private.gmailfeed 0.1
+import QtQuick
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
+import org.kde.kirigami as Kirigami
+import org.kde.notification
+import org.kde.plasma.private.gmailfeed
 
-Item {
+PlasmoidItem {
     id: mainItem
     
     property string subtext: ""
-    property string title: Plasmoid.title
     
-    Plasmoid.toolTipSubText: subtext
-    Plasmoid.icon: xmlModel.count > 0 ? "mail-unread-new" : "mail-unread"
-    Plasmoid.compactRepresentation: CompactRepresentation {}
-    Plasmoid.fullRepresentation: FullRepresentation {}
-    Plasmoid.switchWidth: units.gridUnit * 8
-    Plasmoid.switchHeight: units.gridUnit * 8
+    Plasmoid.icon: "gmailfeed"
+    Plasmoid.busy: xmlModel.status === GxmlModel.Loading
+    toolTipSubText: subtext
+    compactRepresentation: CompactRepresentation {}
+    fullRepresentation: FullRepresentation {}
+    switchWidth: Kirigami.Units.gridUnit * 8
+    switchHeight: Kirigami.Units.gridUnit * 8
     
     Account {
         id: account
@@ -42,9 +43,9 @@ Item {
         accountId: plasmoid.configuration.accountId
         onAccountIdChanged: {
             if (accountId == 0) {
-                plasmoid.status = PlasmaCore.Types.ActiveStatus
+                Plasmoid.status = PlasmaCore.Types.ActiveStatus
             } else {
-                plasmoid.status = PlasmaCore.Types.PassiveStatus
+                Plasmoid.status = PlasmaCore.Types.PassiveStatus
                 action_checkMail()
             }
         }
@@ -62,57 +63,48 @@ Item {
         interval: 1000
         onTriggered: action_checkMail()
     }
-    
+
     Notification {
-        id: notification
+        id: newMailNotification
+
+        componentName: "gmailfeed"
+        eventId: "new-mail-arrived"
+        iconName: "gmailfeed"
+        title: Plasmoid.title
     }
-    
-    XmlListModel {
+
+    GxmlModel {
         id: xmlModel
-        
-        property int newMailCount: 0
-        property int newMailId: -1
 
         xml: account.feed
-        namespaceDeclarations: "declare default element namespace 'http://purl.org/atom/ns#';"
-        query: "/feed/entry"
 
-        XmlRole { name: "author"; query: "author/name/string()" }
-        XmlRole { name: "title"; query: "title/string()" }
-        XmlRole { name: "link"; query: "link/@href/string()" }
-        XmlRole { name: "id"; query: "id/string()"; isKey: true }
-        
-        onRowsInserted: {
-            newMailCount += last-first+1
-            newMailId = first
+        onNewMessage: (author, title) => {
+            newMailNotification.text = "<b>"+author+": "+"</b>"+title
+            newMailNotification.sendEvent()
+        }
+
+        onNewMessages: (count) => {
+            newMailNotification.text = i18np("1 new message", "%1 new messages", count)
+            newMailNotification.sendEvent()
         }
         
         onStatusChanged: {
             switch (status) {
-                case XmlListModel.Null:
+                case GxmlModel.Null:
                     mainItem.subtext = "Null model"
                     break
-                case XmlListModel.Ready:
-                    plasmoid.status = (xmlModel.count > 0) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.PassiveStatus
-                    if (xmlModel.count > 0) {
-                        mainItem.subtext = i18np("1 unread message", "%1 unread messages", xmlModel.count)
+                case GxmlModel.Ready:
+                    Plasmoid.status = (xmlModel.count > 0) ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.PassiveStatus
+                    if (xmlModel.fullcount > 0) {
+                        mainItem.subtext = i18np("1 unread message", "%1 unread messages", xmlModel.fullcount)
                     } else {
                         mainItem.subtext = i18n("No unread messages")
                     }
-                    if (newMailCount > 0) {
-                        var message
-                        if (newMailCount == 1) 
-                            message = "<b>"+get(newMailId).author+": "+"</b>"+get(newMailId).title
-                        else 
-                            message =  i18np("1 new message", "%1 new messages", newMailCount)
-                        notification.send("new-mail-arrived", mainItem.title, message, "gmailfeed", "gmailfeed")
-                        newMailCount = 0
-                    }
                     break
-                case XmlListModel.Loading:
+                case GxmlModel.Loading:
                     mainItem.subtext = i18n("Checking for new messages...")
                     break
-                case XmlListModel.Error:
+                case GxmlModel.Error:
                     mainItem.subtext = errorString()
                     break
                 default:
@@ -138,12 +130,24 @@ Item {
     function action_openInbox() {
         Qt.openUrlExternally("https://mail.google.com")
     }
-    
+
+    Plasmoid.contextualActions: [
+        PlasmaCore.Action {
+            text: i18n("Open inbox")
+            icon.name: "gmailfeed"
+            visible: true
+            onTriggered: action_openInbox()
+        },
+        PlasmaCore.Action {
+            text: i18n("Check mail")
+            icon.name: "mail-receive"
+            visible: true
+            onTriggered: action_checkMail()
+        }
+    ]
+
     Component.onCompleted: { 
-        plasmoid.status = PlasmaCore.Types.ActiveStatus
-        plasmoid.setAction("openInbox", i18n("Open inbox"), "folder-mail")
-        plasmoid.setAction("checkMail", i18n("Check mail"), "mail-receive")
-        plasmoid.setActionSeparator("separator0")
+        Plasmoid.status = PlasmaCore.Types.ActiveStatus
     }
     
 }

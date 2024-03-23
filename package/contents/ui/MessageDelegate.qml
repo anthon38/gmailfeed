@@ -17,28 +17,25 @@
  *  along with Gmail Feed.  If not, see <http://www.gnu.org/licenses/>.     *
  ****************************************************************************/
 
-import QtQuick 2.0
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import QtQuick
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.plasma.extras as PlasmaExtras
+import org.kde.kirigami as Kirigami
 
-PlasmaComponents.ListItem {
-    id: listItem
+PlasmaExtras.ListItem {
 
-    enabled: true
-    
-    PlasmaComponents.Label {
-        id: label
-
-        anchors.left: parent.left
-        anchors.right: parent.right
-        text: i18nc("Message delegate, author: title", "<b>%1: </b>%2", author, title)
-        elide: Text.ElideRight
+    contentItem: Kirigami.Padding {
+        padding: Kirigami.Units.smallSpacing
+        contentItem: PlasmaComponents.Label {
+            text: i18nc("Message delegate, author: title", "<b>%1: </b>%2", author, title)
+            elide: Text.ElideRight
+        }
     }
-    
-    MouseArea {
-        anchors.fill: parent
-        onClicked: activate()
-    }
-    
+
+    onClicked: activate()
+    Keys.onEnterPressed: activate()
+    Keys.onReturnPressed: activate()
+
     function activate() {
         Qt.openUrlExternally(link)
     }

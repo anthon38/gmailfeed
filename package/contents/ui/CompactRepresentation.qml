@@ -17,29 +17,28 @@
  *  along with Gmail Feed.  If not, see <http://www.gnu.org/licenses/>.     *
  ****************************************************************************/
 
-import QtQuick 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.plasmoid 2.0
+import QtQuick
+import org.kde.plasma.core as PlasmaCore
+import org.kde.kirigami as Kirigami
 
-PlasmaCore.IconItem {
+Kirigami.Icon {
     
-    anchors.fill: parent
-    source: Plasmoid.icon
+    source: xmlModel.count > 0 ? "mail-unread-new-symbolic" : "mail-unread-symbolic"
     
     MouseArea {
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.MiddleButton
-        onClicked: {
+        onClicked: (mouse) => {
             if (mouse.button == Qt.MiddleButton) {
                 mainItem.action_openInbox()
             } else {
-                plasmoid.expanded = !plasmoid.expanded
+                mainItem.expanded = !mainItem.expanded
             }
         }
     }
 
-    PlasmaCore.IconItem {
-        
+    Kirigami.Icon {
+
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.top: parent.verticalCenter

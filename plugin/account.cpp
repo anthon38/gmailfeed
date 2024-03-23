@@ -22,8 +22,8 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 
-#include <KAccounts/core.h>
-#include <KAccounts/getcredentialsjob.h>
+#include <KAccounts/Core>
+#include <KAccounts/GetCredentialsJob>
 
 #include <Accounts/Manager>
 
@@ -45,14 +45,14 @@ void Account::updateFeed()
         return;
     }
 
-    auto job = new GetCredentialsJob(m_id, this);
-    connect(job, &GetCredentialsJob::result, this, &Account::credentialsReceived);
+    auto job = new KAccounts::GetCredentialsJob(m_id, this);
+    connect(job, &KAccounts::GetCredentialsJob::result, this, &Account::credentialsReceived);
     job->start();
 }
 
 void Account::credentialsReceived(KJob *job)
 {
-    GetCredentialsJob* credentials = qobject_cast<GetCredentialsJob*>(job);
+    KAccounts::GetCredentialsJob* credentials = qobject_cast<KAccounts::GetCredentialsJob*>(job);
     if (credentials->error()) {
         qWarning() << "Couldn't fetch credentials";
         return;
@@ -63,11 +63,6 @@ void Account::credentialsReceived(KJob *job)
     QNetworkRequest req(QUrl("https://mail.google.com/mail/feed/atom"));
     req.setRawHeader("Authorization", "Bearer "+accessToken);
 
-#if QT_VERSION == 0x050501
-    // Workaround QTBUG-49760
-    // If the network is not accessible this shouldn't be called anyway
-    m_networkManager.setNetworkAccessible(QNetworkAccessManager::Accessible);
-#endif
     auto reply = m_networkManager.get(req);
     connect(reply, &QNetworkReply::finished, this, &Account::newData);
 }

@@ -17,13 +17,13 @@
  *  along with Gmail Feed.  If not, see <http://www.gnu.org/licenses/>.     *
  ****************************************************************************/
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.0 as QtLayouts
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddons
-import org.kde.plasma.private.gmailfeed 0.1
+import QtQuick
+import QtQuick.Layouts
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.kcmutils // KCMLauncher
+import org.kde.plasma.private.gmailfeed
 
-Item {
+SimpleKCM {
     id: accountsPage
 
     property int cfg_accountId
@@ -43,8 +43,7 @@ Item {
         }
     }
 
-    QtLayouts.RowLayout {
-        id: currentAccountGroup
+    RowLayout {
 
         PlasmaComponents.Label {
             text: i18n("Current account: ")
@@ -55,17 +54,18 @@ Item {
 
             model: accountsModel
             textRole: "name"
-            onActivated: cfg_accountId = accountsModel.getId(index)
+            onActivated: cfg_accountId = accountsModel.getId(comboBox.currentIndex)
         }
-    }
 
-    PlasmaComponents.Button {
-        anchors.right: parent.right
-        anchors.top: currentAccountGroup.top
-        anchors.bottom: currentAccountGroup.bottom
+        Item {
+            Layout.fillWidth: true
+        }
 
-        iconSource: "applications-internet"
-        text: i18n("Manage accounts...")
-        onClicked: KQuickControlsAddons.KCMShell.open("kcm_kaccounts")
+        PlasmaComponents.Button {
+
+            icon.name: "applications-internet"
+            text: i18n("Manage accounts...")
+            onClicked: KCMLauncher.openInfoCenter("kcm_kaccounts")
+        }
     }
 } 

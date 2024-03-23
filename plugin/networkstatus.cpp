@@ -22,7 +22,8 @@
 NetworkStatus::NetworkStatus(QObject *parent)
     : QObject(parent)
 {
-    connect(&m_networkConfig, SIGNAL(onlineStateChanged(bool)), this, SIGNAL(isOnlineChanged()));
+    QNetworkInformation::loadDefaultBackend();
+    connect(QNetworkInformation::instance(), SIGNAL(reachabilityChanged(QNetworkInformation::Reachability)), this, SIGNAL(isOnlineChanged()));
 }
 
 NetworkStatus::~NetworkStatus()

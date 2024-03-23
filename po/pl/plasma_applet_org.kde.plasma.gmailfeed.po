@@ -1,0 +1,98 @@
+# gmailfeed polish translations.
+# Copyright (C) 2015 Daniel Winiarski
+# This file is distributed under the same license as the Gmail Feed package.
+#
+# Daniel Winiarski <daniel.winiarski.dw@gmail.com>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: gmailfeed 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-23 14:02+0100\n"
+"PO-Revision-Date: 2015-05-26 21:28+0100\n"
+"Last-Translator: Daniel Winiarski <daniel.winiarski.dw@gmail.com>\n"
+"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language: Polish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: package/contents/ui/configAccounts.qml:49
+msgid "Current account: "
+msgstr ""
+
+#: package/contents/ui/configAccounts.qml:67
+msgid "Manage accounts..."
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:32
+msgid "Polling interval: "
+msgstr "Częstotliwość sprawdzania:"
+
+#: package/contents/ui/configGeneral.qml:40
+msgctxt "Polling interval in minutes"
+msgid "%1 min"
+msgid_plural "%1 min"
+msgstr[0] ""
+msgstr[1] ""
+
+#: package/contents/ui/MessageDelegate.qml:30
+msgctxt "Message delegate, author: title"
+msgid "<b>%1: </b>%2"
+msgstr "<b>%1 : </b>%2"
+
+#: package/contents/ui/main.qml:87
+msgid "1 new message"
+msgid_plural "%1 new messages"
+msgstr[0] "1 nowa wiadomość"
+msgstr[1] "%1 nowe wiadomości"
+
+#: package/contents/ui/main.qml:99
+msgid "1 unread message"
+msgid_plural "%1 unread messages"
+msgstr[0] "1 nieprzeczytana wiadomość"
+msgstr[1] "%1 nieprzeczytane wiadomości"
+
+#: package/contents/ui/main.qml:101
+msgid "No unread messages"
+msgstr "Brak nieprzeczytanych wiadomości"
+
+#: package/contents/ui/main.qml:105
+msgid "Checking for new messages..."
+msgstr "Sprawdzanie nowych wiadomości..."
+
+#: package/contents/ui/main.qml:123
+msgid "Offline"
+msgstr "Tryb offline"
+
+#: package/contents/ui/main.qml:136
+msgid "Open inbox"
+msgstr "Otwórz skrzynkę odbiorczą"
+
+#: package/contents/ui/main.qml:142
+msgid "Check mail"
+msgstr "Sprawdź pocztę"
+
+#: package/contents/ui/ConfigNeededPanel.qml:29
+msgid "Configure..."
+msgstr ""
+
+#: package/contents/config/config.qml:24
+msgid "Accounts"
+msgstr ""
+
+#: package/contents/config/config.qml:29
+msgid "General"
+msgstr "Ogólne"
+
+#~ msgctxt "Polling interval in minutes"
+#~ msgid "min"
+#~ msgid_plural "min"
+#~ msgstr[0] "min"
+#~ msgstr[1] "min"
+
+#, fuzzy
+#~| msgid "Polling interval: "
+#~ msgid "Polling interval in minutes: "
+#~ msgstr "Częstotliwość sprawdzania:"

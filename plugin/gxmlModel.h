@@ -17,39 +17,78 @@
  *  along with Gmail Feed.  If not, see <http://www.gnu.org/licenses/>.     *
  ****************************************************************************/
 
-#ifndef ACCOUNTSMODEL_H
-#define ACCOUNTSMODEL_H
+#ifndef GXMLMODEL_H
+#define GXMLMODEL_H
 
 #include <QAbstractListModel>
+#include <QFutureWatcher>
 
-#include <Accounts/Account>
+typedef QList<QMap<QString, QString>> Data;
+struct GMailData {
+    Data data;
+    int fullCount;
+    bool isValid = false;
+};
 
-class AccountsModel : public QAbstractListModel
+class GxmlModel : public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    enum  AccountRoles {
-            NameRole = Qt::UserRole,
-            IdRole = Qt::UserRole + 1
-        };
-    
-    explicit AccountsModel(QObject *parent = 0);
-    ~AccountsModel();
+    Q_PROPERTY(QString xml READ xml WRITE setXml NOTIFY xmlChanged)
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
+    Q_PROPERTY(int fullcount READ fullcount NOTIFY fullcountChanged)
+    Q_PROPERTY(int status READ status NOTIFY statusChanged)
 
+    enum Status {
+        Null,
+        Ready,
+        Loading,
+        Error
+    };
+    Q_ENUMS(Status)
+
+    enum GxmlRoles {
+        AuthorRole = Qt::UserRole,
+        TitleRole = Qt::UserRole + 1,
+        LinkRole = Qt::UserRole + 2,
+        IdRole = Qt::UserRole + 3
+    };
+    
+    explicit GxmlModel(QObject *parent = 0);
+    ~GxmlModel();
+
+    QString xml() const {return m_xml;}
+    int count() const {return m_data.size();}
+    int fullcount() const {return m_fullcount;}
+    int status() const {return m_status;}
     QHash<int, QByteArray> roleNames() const override;
     int rowCount(const QModelIndex & parent = QModelIndex()) const override;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const override;
 
-    Q_INVOKABLE int getId(int index) const;
-    Q_INVOKABLE int indexOf(int id) const;
+    Q_INVOKABLE QString errorString() const {return m_errorString;}
+
+Q_SIGNALS:
+    void xmlChanged();
+    void countChanged();
+    void fullcountChanged();
+    void statusChanged();
+    void newMessage(QString author, QString title);
+    void newMessages(int count);
 
 private Q_SLOTS:
-    void accountCreated(Accounts::AccountId id);
-    void accountRemoved(Accounts::AccountId id);
+    void setXml(QString xml);
+    void xmlParsed();
 
 private:
-    QList<Accounts::AccountId> m_accounts;
+    GMailData parseXml(QString xml);
+
+    QString m_xml;
+    int m_status;
+    Data m_data;
+    int m_fullcount;
+    QString m_errorString;
+    QFutureWatcher<GMailData> m_watcher;
 };
 
 #endif

@@ -19,5 +19,5 @@ Name[cs]=Přijmutí Nového Emailu
 Name[uk]=Отримано нова пошта
 Name[nl]=U heeft nieuwe mail
 Name[pt_BR]=Novos e-mails disponíveis
-Sound=KDE-Im-New-Mail.ogg
+Sound=Oxygen-Im-New-Mail.ogg
 Action=Popup|Sound

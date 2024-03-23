@@ -17,30 +17,32 @@
  *  along with Gmail Feed.  If not, see <http://www.gnu.org/licenses/>.     *
  ****************************************************************************/
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.0 as QtLayouts
-import QtQuick.Controls 1.2
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import QtQuick
+import QtQuick.Layouts
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.kcmutils
 
-Item {
+SimpleKCM {
     id: generalPage
-    
-    width: childrenRect.width
-    height: childrenRect.height
-    
+
     property alias cfg_pollinterval: spinbox.value
-    
-    QtLayouts.RowLayout {
+
+    RowLayout {
         PlasmaComponents.Label {
             text: i18n("Polling interval: ")
         }
-        
-        SpinBox {
+
+        PlasmaComponents.SpinBox {
             id: spinbox
-            
-            suffix: i18ncp("Polling interval in minutes", "min", "min", value)
-            minimumValue: 1
-            maximumValue: 90
+            from: 1
+            to: 90
+            live: true
+            textFromValue: (value, locale) => { return i18ncp("Polling interval in minutes", "%1 min", "%1 min", value) }
+            valueFromText: (text, locale) => { return Number.fromLocaleString(locale, text.replace(/[^0-9]/g,"")) }
+        }
+
+        Item {
+            Layout.fillWidth: true
         }
     }
-} 
+}
