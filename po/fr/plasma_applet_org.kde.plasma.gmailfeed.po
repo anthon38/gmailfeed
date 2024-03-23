@@ -19,7 +19,7 @@ msgstr ""
 
 #: package/contents/ui/configAccounts.qml:49
 msgid "Current account: "
-msgstr "Compte actuel: "
+msgstr "Compte actuel : "
 
 #: package/contents/ui/configAccounts.qml:67
 msgid "Manage accounts..."
@@ -27,7 +27,7 @@ msgstr "Gérer les comptes..."
 
 #: package/contents/ui/configGeneral.qml:32
 msgid "Polling interval: "
-msgstr "Intervalle de vérification: "
+msgstr "Intervalle de vérification : "
 
 #: package/contents/ui/configGeneral.qml:40
 msgctxt "Polling interval in minutes"
@@ -39,7 +39,7 @@ msgstr[1] "%1 min"
 #: package/contents/ui/MessageDelegate.qml:30
 msgctxt "Message delegate, author: title"
 msgid "<b>%1: </b>%2"
-msgstr "<b>%1 : </b>%2"
+msgstr "<b>%1 : </b>%2"
 
 #: package/contents/ui/main.qml:87
 msgid "1 new message"
