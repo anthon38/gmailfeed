@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: gmailfeed 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-23 14:02+0100\n"
-"PO-Revision-Date: 2022-06-08 17:53+0200\n"
+"PO-Revision-Date: 2024-03-23 21:56+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: package/contents/ui/configAccounts.qml:49
 msgid "Current account: "
@@ -27,14 +27,14 @@ msgstr "Accounts beheren…"
 
 #: package/contents/ui/configGeneral.qml:32
 msgid "Polling interval: "
-msgstr "Tussenpoos: "
+msgstr "Controleren, elke "
 
 #: package/contents/ui/configGeneral.qml:40
 msgctxt "Polling interval in minutes"
 msgid "%1 min"
 msgid_plural "%1 min"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 min"
+msgstr[1] "%1 min."
 
 #: package/contents/ui/MessageDelegate.qml:30
 msgctxt "Message delegate, author: title"
@@ -59,7 +59,7 @@ msgstr "Er zijn geen ongelezen berichten"
 
 #: package/contents/ui/main.qml:105
 msgid "Checking for new messages..."
-msgstr "Bezig met controleren op nieuwe berichten…"
+msgstr "Bezig met controleren op berichten…"
 
 #: package/contents/ui/main.qml:123
 msgid "Offline"
@@ -75,7 +75,7 @@ msgstr "E-mail controleren"
 
 #: package/contents/ui/ConfigNeededPanel.qml:29
 msgid "Configure..."
-msgstr ""
+msgstr "Instellen…"
 
 #: package/contents/config/config.qml:24
 msgid "Accounts"
