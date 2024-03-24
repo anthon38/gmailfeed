@@ -23,7 +23,7 @@
           <setting name="Scope" type="as">[
               'https://mail.google.com/mail/feed/atom'
           ]</setting>
-          <setting name="AllowedSchemes" type="as">['https','http']</setting>
+          <setting name="AllowedSchemes" type="as">['https']</setting>
           <setting name="ClientId">722576520700-s76fk9s03goef1qcjqq4i290rsdinc3o.apps.googleusercontent.com</setting>
           <setting name="ClientSecret">smhBM_JqEZHAZZlYrVtO7ZnP</setting>
           <setting name="ForceClientAuthViaRequestBody" type="b">true</setting>
