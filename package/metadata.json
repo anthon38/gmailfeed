@@ -14,7 +14,7 @@
         "Category": "Online Services",
         "Icon": "gmailfeed",
         "Id": "org.kde.plasma.gmailfeed",
-        "License": "GPL3",
+        "License": "GPL-3.0+",
         "Version": "2.0",
         "Website": "https://github.com/anthon38/gmailfeed",
         "EnabledByDefault": true
